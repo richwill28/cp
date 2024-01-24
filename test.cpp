@@ -9,10 +9,16 @@
 
 bool identical_file(const std::string path1, const std::string &path2);
 
-int main() {
-  std::string in_dir{"inputs"};
-  std::string out_dir{"outputs"};
-  std::string log_dir{"logs"};
+int main(int argc, char **argv) {
+  if (argc != 5) {
+    std::cerr << "Usage: ./test <executable> <inputs> <outputs> <logs>\n";
+    std::exit(EXIT_FAILURE);
+  }
+
+  std::string exec_file{argv[1]};
+  std::string in_dir{argv[2]};
+  std::string out_dir{argv[3]};
+  std::string log_dir{argv[4]};
 
   int total = 0;
   int failed = 0;
@@ -26,7 +32,8 @@ int main() {
     std::string log_file = fmt::format("{}.out", testcase);
     std::string log_path = fmt::format("{}/{}", log_dir, log_file);
 
-    std::string command = fmt::format("./main < {} > {}", in_path, log_path);
+    std::string command =
+        fmt::format("./{} < {} > {}", exec_file, in_path, log_path);
 
     auto time_begin = std::chrono::steady_clock::now();
     std::system(command.c_str());

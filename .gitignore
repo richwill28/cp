@@ -1,5 +1,15 @@
-# Executables
-main
+# Cargo
+Cargo.lock
+target
 
 # CMake
 build
+
+# Executables
+main
+
+# Trunk
+.trunk
+
+# VSCode
+.vscode

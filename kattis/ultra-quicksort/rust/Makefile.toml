@@ -1,0 +1,18 @@
+[tasks.default]
+alias = "flow"
+
+[tasks.flow]
+dependencies = ["format", "build"]
+
+[tasks.format]
+command = "cargo"
+args = ["fmt"]
+
+[tasks.build]
+command = "cargo"
+args = ["build", "--all-features"]
+
+[tasks.test]
+command = "./../../../build/test"
+args = ["target/debug/rust", "../inputs", "../outputs", "../logs"]
+dependencies = ["format", "build"]
